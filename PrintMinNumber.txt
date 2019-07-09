@@ -1,0 +1,41 @@
+
+
+import java.util.ArrayList;
+
+class Solution {
+    long min = Long.MAX_VALUE;
+    public void Findit(int[] numbers,int start){
+        if(start == numbers.length-1){
+            String str = "";
+            for(int i=0; i<numbers.length; i++)
+                str += numbers[i];
+            long tmp = Long.valueOf(str);
+            if(tmp < min)
+                min = tmp;
+        }
+        for(int i=start; i<numbers.length; i++){
+            swap(numbers,i,start);
+            Findit(numbers,start+1);
+            swap(numbers,i,start);
+        }
+    }
+
+    public String PrintMinNumber(int [] numbers) {
+        if(numbers.length == 0)
+            return "";
+        Findit(numbers,0);
+        return min+"";
+    }
+
+    public void swap(int[] chars,int index1, int index2){
+        int tmp = chars[index1];
+        chars[index1] = chars[index2];
+        chars[index2] = tmp;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        new Solution().PrintMinNumber(new int[]{3334,3,3333332});
+    }
+}
